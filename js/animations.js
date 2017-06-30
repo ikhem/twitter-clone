@@ -3,9 +3,15 @@ $(document).ready(function(){
     var tweetCtrl = $('#tweet-controls')
     var tweet = $('.tweet-compose')
     var charCount = $('#char-count')
+    var tweetSubmitBtn = $('#tweet-submit')
 
     var tweetChar = 140;
     var messageLength = 0;
+
+    // Add a tweet
+    var addTweet = function(){
+        $('#stream').prepend('<div class="tweet"></div>')
+    }
 
     // Step 1 & 2
     tweetCtrl.hide();
@@ -15,7 +21,7 @@ $(document).ready(function(){
         tweetCtrl.show();
     })
 
-    // Step 3
+    // Step 4
     function disableBtn(){
         $('#tweet-submit').removeClass("button")
         $('#tweet-submit').addClass("button.disabled")
@@ -26,6 +32,7 @@ $(document).ready(function(){
         $('#tweet-submit').addClass("button")
     }
 
+    // Step 3
     tweet.keyup(function(){
 
         messageLength = $(this).val().length
@@ -46,11 +53,18 @@ $(document).ready(function(){
         else{
             charCount.text(tweetChar-messageLength) 
         }
-       
+
+        $(tweetSubmitBtn).on('click', function(){
+            if(messageLength > 0){
+                addTweet()
+            }        
+        })
+    
     })
+    
+    
 
-
-
+    // Step 5
 
     
 })
