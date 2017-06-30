@@ -16,17 +16,37 @@ $(document).ready(function(){
     })
 
     // Step 3
-    tweet.keyup(function(e){
+    function disableBtn(){
+        $('#tweet-submit').removeClass("button")
+        $('#tweet-submit').addClass("button.disabled")
+    }
+
+    function enableBtn(){
+        $('#tweet-submit').removeClass("button.disabled")
+        $('#tweet-submit').addClass("button")
+    }
+
+    tweet.keyup(function(){
 
         messageLength = $(this).val().length
-        
-        charCount.text(tweetChar-messageLength)
-
-        if(messageLength >= 130){
+    
+        if(messageLength > 140){
+            disableBtn();
+        }
+        else if(messageLength >= 130){
             charCount.css('color', 'red')
+            enableBtn();
         } else{
             charCount.css('color', '#999')
         } 
+
+        if(messageLength > 140){
+            charCount.txt(0)
+        }
+        else{
+            charCount.text(tweetChar-messageLength) 
+        }
+       
     })
 
 
